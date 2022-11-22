@@ -7,7 +7,7 @@
 #### How to:
 1. Clone the repository or download it to your Desktop.
 2. Run `npm install` in your terminal under the project's name directory.
-3. Run `npm run start` to start the server.
+3. Run `npm run start` to start the server. ( The server runs on port 3000 )
 
 #### Instructions:
 A look of how a beverage vending machine works. 
