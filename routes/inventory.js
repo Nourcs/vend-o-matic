@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+// Initializing Fake Inventory
 let inventory = [
   {
     "id": "soda",
@@ -12,17 +13,17 @@ let inventory = [
   },
   {
     "id": "juice",
-    "quantity": 5
+    "quantity": 1
   }
 ]
 
-// Inventory
+// Get the inventory
 router.get('/', function(req, res, next) {
   const remainingItems = inventory.map(item => item.quantity)
   res.json(remainingItems);
 });
 
-// Inventory ID
+// Get specific item's quantity
 router.get('/:id', function(req, res, next) {
   const {id } = req.params
   const item = inventory.find(el => el.id === id)
@@ -33,31 +34,31 @@ router.get('/:id', function(req, res, next) {
   }
 });
 
-// Insufficient Quantity
+// In case the quantity is insufficient
 router.put('/:id', function (req, res, next) {
   const {id } = req.params
   const item = inventory.find(el => el.id === id)
   const totalCoins = Number(req.cookies.coins)
 
   if(!item || (item && item.quantity === 0)){
-    res.set('X-Coins', totalCoins).sendStatus(404)
+    res.set('X-Coins', totalCoins).status(404).send({error : 'Insufficient Quantity'})
   } else {
     next()
   }
 })
 
-// Insufficient Coins
+// In case the coins are insufficient
 router.put('/:id', function (req, res, next) {
   const totalCoins = Number(req.cookies.coins)
 
   if(totalCoins < 2) {
-    res.set('X-Coins', totalCoins).sendStatus(403)
+    res.set('X-Coins', totalCoins).status(403).send({error : 'Insufficient Coins'})
   } else {
     next()
   }
 })
 
-// Main Route
+// Buying an item
 router.put('/:id', function(req, res, next) {
   const {id } = req.params
   const totalCoins = Number(req.cookies.coins)

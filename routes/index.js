@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// PUT
+// Add a coin
 router.put('/', function(req, res, next) {
   const coin = Number(req.body.coin)
   const totalCoins = Number(req.cookies.coins)
@@ -16,7 +16,7 @@ router.put('/', function(req, res, next) {
   }
 })
 
-// DELETE
+// Cancel Transaction
 router.delete('/', function(req, res, next) {
   const totalCoins = Number(req.cookies.coins)
   res.cookie('coins', 0).set('X-Coins', totalCoins).sendStatus(204);
