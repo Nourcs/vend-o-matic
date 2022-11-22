@@ -12,7 +12,7 @@ router.put('/', function(req, res, next) {
     res.set('X-Coins', updatedCoins)
     res.sendStatus(204);
   } else {
-    res.set('X-Coins', totalCoins).sendStatus(400)
+    res.set('X-Coins', totalCoins).status(400).send({error : 'Missing coin'})
   }
 })
 

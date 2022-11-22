@@ -70,7 +70,10 @@ router.put('/:id', function(req, res, next) {
   const item = inventory.find(el => el.id === id)
   item.quantity -= 1;
 
+  // number of items vended in this transaction
   res.cookie('coins', 0).set('X-Coins', updatedCoins).set('X-Inventory-Remaining', item.quantity).json({quantity : 1});
+  // number of items vended since stock refill of this item
+  // res.cookie('coins', 0).set('X-Coins', updatedCoins).set('X-Inventory-Remaining', item.quantity).json({quantity : 5 - item.quantity});
 });
 
 
