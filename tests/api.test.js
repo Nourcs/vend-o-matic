@@ -29,6 +29,13 @@ describe("/", () => {
             expect(response.statusCode).toBe(204);
         });
     });
+
+    it("DELETE / 204 ( 4 Coins Accepted )", () => {
+        return request(app).delete("/").set('Cookie', ['coins=4']).then(response => {
+            expect(response.headers["x-coins"]).toBe('4');
+            expect(response.statusCode).toBe(204);
+        });
+    });
 });
 
 describe("/inventory", () => {
