@@ -38,10 +38,10 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function (req, res, next) {
   const {id } = req.params
   const item = inventory.find(el => el.id === id)
-  const totalCoins = Number(req.cookies.coins)
+  const totalCoins = Number(req.cookies.coins || 0)
 
   if(!item || (item && item.quantity === 0)){
-    res.set('X-Coins', totalCoins).status(404).send({error : 'Insufficient Quantity'})
+    res.set('X-Coins', totalCoins).sendStatus(404)
   } else {
     next()
   }
@@ -49,10 +49,10 @@ router.put('/:id', function (req, res, next) {
 
 // In case the coins are insufficient
 router.put('/:id', function (req, res, next) {
-  const totalCoins = Number(req.cookies.coins)
+  const totalCoins = Number(req.cookies.coins || 0)
 
   if(totalCoins < 2) {
-    res.set('X-Coins', totalCoins).status(403).send({error : 'Insufficient Coins'})
+    res.set('X-Coins', totalCoins).sendStatus(403)
   } else {
     next()
   }
@@ -61,7 +61,7 @@ router.put('/:id', function (req, res, next) {
 // Buying an item
 router.put('/:id', function(req, res, next) {
   const {id } = req.params
-  const totalCoins = Number(req.cookies.coins)
+  const totalCoins = Number(req.cookies.coins || 0)
 
   // Update Coins
   const updatedCoins = totalCoins - 2
