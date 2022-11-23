@@ -74,4 +74,20 @@ describe("/inventory/:id", () => {
             expect(response.statusCode).toBe(403);
         });
     });
+
+    it("PUT / 200", () => {
+        return request(app).put("/inventory/juice").set('Cookie', ['coins=5']).then(response => {
+            expect(response.headers["x-coins"]).toBe('3');
+            expect(response.headers["x-inventory-remaining"]).toBe('0');
+            expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it("PUT / 200", () => {
+        return request(app).put("/inventory/water").set('Cookie', ['coins=7']).then(response => {
+            expect(response.headers["x-coins"]).toBe('5');
+            expect(response.headers["x-inventory-remaining"]).toBe('4');
+            expect(response.statusCode).toBe(200);
+        });
+    });
 });
