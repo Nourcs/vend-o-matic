@@ -2,12 +2,13 @@
 
 #### Requirements:
 - Download and Install [Node.js](https://nodejs.org/en/download/)
-- Optional: [Postman Agent](https://www.postman.com/downloads/postman-agent/) to test the endpoints.
+- Optional: [Postman](https://www.postman.com/downloads/postman-agent/) to test the endpoints.
 
 #### How to:
 1. Clone the repository or download it to your Desktop.
 2. Run `npm install` in your terminal under the project's name directory.
 3. Run `npm run start` to start the server. ( The server runs on port 3000 )
+4. Run `npm run test` to run the suite of tests for each endpoint.
 
 #### Instructions:
 A look of how a beverage vending machine works. 
